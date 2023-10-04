@@ -8,4 +8,4 @@ Syntax highlighting for Fizz.
 
 ## Examples
 
-![example](https://github.com/rujax/fizz-syntax/assets/images/example.png)
+![example](https://raw.githubusercontent.com/rujax/fizz-syntax/main/assets/images/example.png)
