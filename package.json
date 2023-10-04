@@ -1,0 +1,48 @@
+{
+  "name": "fizz-syntax",
+  "displayName": "Fizz Syntax",
+  "description": "A Common DSL for Migrating Databases.",
+  "version": "1.0.0",
+  "icon": "icon.png",
+  "keywords": [
+    "fizz",
+    "syntax",
+    "highlighting"
+  ],
+  "engines": {
+    "vscode": "^1.82.0"
+  },
+  "author": {
+    "name": "Rujax Chen"
+  },
+  "publisher": "rujax-chen",
+  "categories": [
+    "Programming Languages"
+  ],
+  "repository": {
+    "url": "https://github.com/rujax/fizz-syntax",
+    "type": "git"
+  },
+  "contributes": {
+    "languages": [
+      {
+        "id": "fizz",
+        "aliases": [
+          "fizz",
+          "fizz"
+        ],
+        "extensions": [
+          ".fizz"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "fizz",
+        "scopeName": "source.fizz",
+        "path": "./syntaxes/fizz.tmLanguage.json"
+      }
+    ]
+  }
+}
