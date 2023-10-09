@@ -55,7 +55,7 @@
 					"name": "support.type.fizz",
 					"begin": "\"",
 					"end": "\"",
-					"match": "\\b(string|text|timestamp|time|datetime|integer|int|bool|uuid|boolean|numeric|varchar)\\b"
+					"match": "\\b(string|text|timestamp|time|datetime|integer|int|bool|uuid|boolean|numeric|varchar|json)\\b"
 				}
 			]
 		},
