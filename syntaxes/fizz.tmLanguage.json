@@ -22,6 +22,9 @@
 		},
 		{
 			"include": "#strings"
+		},
+		{
+			"include": "#functions"
 		}
 	],
 	"repository": {
@@ -30,10 +33,6 @@
 				{
 					"name": "keyword.control.fizz",
 					"match": "\\b(if|else|end)\\b"
-				},
-				{
-					"name": "keyword.other.fizz",
-					"match": "\\b(create_table|drop_table|rename_table|add_column|change_column|rename_column|drop_column|add_index|rename_index|drop_index|add_foreign_key|drop_foreign_key|sql|exec)\\b"
 				}
 			]
 		},
@@ -52,7 +51,7 @@
 		"types": {
 			"patterns": [
 				{
-					"name": "support.type.fizz",
+					"name": "entity.name.type.fizz",
 					"begin": "\"",
 					"end": "\"",
 					"match": "\\b(string|text|timestamp|time|datetime|integer|int|bool|uuid|boolean|numeric|varchar|json)\\b"
@@ -62,7 +61,7 @@
 		"options": {
 			"patterns": [
 				{
-					"match": "\\{{1}\\s*([\"|']?)\\b(primary|size|length|scale|precision|null|default|default_raw|after|first|comment|timestamps|name|on_delete|on_update|unique|if_exists)\\b([\"|']?)\\s*\\:{1}",
+					"match": "\\{{1}\\s*([\"|']?)\\b(primary|size|length|scale|precision|null|default|default_raw|after|first|comment|timestamps|name|on_delete|on_update|unique|if_exists|ref_table_name)\\b([\"|']?)\\s*\\:{1}",
 					"captures": {
 						"1": {
 							"name": "string.quoted"
@@ -76,7 +75,7 @@
 					}
 				},
 				{
-					"match": ",{1}\\s*([\"|']?)\\b(primary|size|length|scale|precision|null|default|default_raw|after|first|comment|timestamps|name|on_delete|on_update|unique|if_exists)\\b([\"|']?)\\s*\\:{1}",
+					"match": ",{1}\\s*([\"|']?)\\b(primary|size|length|scale|precision|null|default|default_raw|after|first|comment|timestamps|name|on_delete|on_update|unique|if_exists|ref_table_name)\\b([\"|']?)\\s*\\:{1}",
 					"captures": {
 						"1": {
 							"name": "string.quoted"
@@ -90,7 +89,7 @@
 					}
 				},
 				{
-					"match": "^\\s+([\"|']?)\\b(primary|size|length|scale|precision|null|default|default_raw|after|first|comment|timestamps|name|on_delete|on_update|unique|if_exists)\\b([\"|']?)\\s*\\:{1}",
+					"match": "^\\s+([\"|']?)\\b(primary|size|length|scale|precision|null|default|default_raw|after|first|comment|timestamps|name|on_delete|on_update|unique|if_exists|ref_table_name)\\b([\"|']?)\\s*\\:{1}",
 					"captures": {
 						"1": {
 							"name": "string.quoted"
@@ -108,13 +107,22 @@
 		"entities": {
 			"patterns": [
 				{
-					"match": "\\s*(t)\\.\\b(eq|Column|PrimaryKey|ForeignKey|Timestamps|DisableTimestamps)\\b",
+					"match": "\\s*(t)\\.(eq|Column|PrimaryKey|ForeignKey|Timestamps|DisableTimestamps)\\(([\"]?)([\\w]*)([\"]?),?",
 					"captures": {
 						"1": {
-							"name": "variable.parameter"
+							"name": "token.debug-token.fizz"
 						},
 						"2": {
-							"name": "entity.name.function"
+							"name": "entity.name.tag.fizz"
+						},
+						"3": {
+							"name": "string.quoted"
+						},
+						"4": {
+							"name": "entity.name.tag.css.fizz"
+						},
+						"5": {
+							"name": "string.quoted"
 						}
 					}
 				}
@@ -131,12 +139,137 @@
 		"strings": {
 			"patterns": [
 				{
-					"name": "string.quoted.double.fizz",
+					"name": "string.quoted.fizz",
 					"match": "\""
 				},
 				{
-					"name": "string.quoted.single.fizz",
+					"name": "string.quoted.fizz",
 					"match": "'"
+				}
+			]
+		},
+		"functions": {
+			"patterns": [
+				{
+					"match": "(create_table|drop_table)\\((\")(.*?)(\")\\)",
+					"captures": {
+						"1": {
+							"name": "variable.other.constant.fizz"
+						},
+						"2": {
+							"name": "string.quoted.fizz"
+						},
+						"3": {
+							"name": "entity.name.operator.fizz"
+						},
+						"4": {
+							"name": "string.quoted.fizz"
+						}
+					}
+				},
+				{
+					"match": "(rename_table)\\((\")(.*?)(\"),\\s?(\")(.*?)(\")\\)",
+					"captures": {
+						"1": {
+							"name": "variable.other.constant.fizz"
+						},
+						"2": {
+							"name": "string.quoted.fizz"
+						},
+						"3": {
+							"name": "entity.name.operator.fizz"
+						},
+						"4": {
+							"name": "string.quoted.fizz"
+						},
+						"5": {
+							"name": "string.quoted.fizz"
+						},
+						"6": {
+							"name": "token.debug-token.fizz"
+						},
+						"7": {
+							"name": "string.quoted.fizz"
+						}
+					}
+				},
+				{
+					"match": "(add_column|change_column|drop_column|add_index|add_foreign_key|drop_foreign_key)\\((\")(.*?)(\"),[\\s]?(\")(.*?)(\")[,]?",
+					"captures": {
+						"1": {
+							"name": "variable.other.constant.fizz"
+						},
+						"2": {
+							"name": "string.quoted.fizz"
+						},
+						"3": {
+							"name": "entity.name.operator.fizz"
+						},
+						"4": {
+							"name": "string.quoted.fizz"
+						},
+						"5": {
+							"name": "string.quoted.fizz"
+						},
+						"6": {
+							"name": "entity.name.tag.css.fizz"
+						},
+						"7": {
+							"name": "string.quoted.fizz"
+						}
+					}
+				},
+				{
+					"match": "(rename_column)\\((\")(.*?)(\"),\\s?(\")(.*?)(\"),\\s?(\")(.*?)(\")\\)",
+					"captures": {
+						"1": {
+							"name": "variable.other.constant.fizz"
+						},
+						"2": {
+							"name": "string.quoted.fizz"
+						},
+						"3": {
+							"name": "entity.name.operator.fizz"
+						},
+						"4": {
+							"name": "string.quoted.fizz"
+						},
+						"5": {
+							"name": "string.quoted.fizz"
+						},
+						"6": {
+							"name": "entity.name.tag.css.fizz"
+						},
+						"7": {
+							"name": "string.quoted.fizz"
+						},
+						"8": {
+							"name": "string.quoted.fizz"
+						},
+						"9": {
+							"name": "entity.name.function.fizz"
+						},
+						"10": {
+							"name": "string.quoted.fizz"
+						}
+					}
+				},
+				{
+					"match": "(sql|exec)\\((\")(.*?)(\")\\)",
+					"captures": {
+						"1": {
+							"name": "variable.other.constant.fizz"
+						},
+						"2": {
+							"name": "string.quoted.fizz"
+						},
+						"3": {
+							"name": "entity.name.label.fizz"
+						},
+						"4": {
+							"name": "string.quoted.fizz"
+						}
+					}
 				}
 			]
 		}

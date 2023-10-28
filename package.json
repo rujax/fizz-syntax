@@ -2,7 +2,7 @@
   "name": "fizz-syntax",
   "displayName": "Fizz Syntax",
   "description": "A Common DSL for Migrating Databases.",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "icon": "icon.png",
   "keywords": [
     "fizz",
