@@ -1,8 +1,8 @@
-create_table("users") {
+create_table("users", { comment: "User Table" }) {
   t.Column("id", "int", { primary: true })
   t.Column("email", "string", { size: 50 }) 
   t.Column("age", "integer", { "null": true, "default": 0 }) // also supports quotes option
-  t.Column("deleted_at", "timestamp", {})
+  t.Column("deleted_at", "timestamp", { comment: "Soft Delete" })
 
   t.Timestamps()
 }
@@ -10,7 +10,7 @@ create_table("users") {
 create_table("todos") {
   t.Column("user_id", "integer", {})
   t.Column("title", "string", { size: 100 })
-  t.Column("aaa", "json", { comment: "aaa" })
+  t.Column("content", "json", { comment: "JSON Content" })
   
   // Disable auto-creation of created_at and updated_at columns
   t.DisableTimestamps()
@@ -22,7 +22,8 @@ add_column("table_name", "column_name", "string", {})
 change_column("table_name", "column_name", "string", {})
 rename_column("table_name", "old_column_name", "new_column_name")
 drop_column("table_name", "column_name")
-add_index("table_name", "column_name", { name: "custom_index_name", unique: true})
+add_index("table_name", "column_name", { name: "custom_index_name", unique: true })
+add_index("table_name", ["first_column_name", "second_column_name"], { name: "union_index_name" })
 
 add_foreign_key("table_name", "column_name", 
   { "ref_table_name": ["ref_column_name"]},

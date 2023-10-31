@@ -151,7 +151,7 @@
 		"functions": {
 			"patterns": [
 				{
-					"match": "(create_table|drop_table)\\((\")(.*?)(\")\\)",
+					"match": "(create_table|drop_table)\\((\")(.*?)(\"),?",
 					"captures": {
 						"1": {
 							"name": "variable.other.constant.fizz"
@@ -190,6 +190,26 @@
 						},
 						"7": {
 							"name": "string.quoted.fizz"
+						}
+					}
+				},
+				{
+					"match": "(add_index)\\((\")(.*?)(\"),\\s?\\[(.*?)\\]",
+					"captures": {
+						"1": {
+							"name": "variable.other.constant.fizz"
+						},
+						"2": {
+							"name": "string.quoted.fizz"
+						},
+						"3": {
+							"name": "entity.name.operator.fizz"
+						},
+						"4": {
+							"name": "string.quoted.fizz"
+						},
+						"5": {
+							"name": "entity.name.tag.css.fizz"
 						}
 					}
 				},
